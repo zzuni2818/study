@@ -28,7 +28,9 @@ int main()
 
 	int input_hour, input_minute, converted_time, 
 		departure_time, arrival_time,
-		compare_with_past, compare_with_comming;
+		compare_with_past, compare_with_comming,
+		past_departure_time, past_arrival_time,
+		comming_departure_time, comming_arrival_time;
 	int i;
 
 	printf("Enter a 24-hour time: ");
@@ -42,52 +44,42 @@ int main()
 				compare_with_past = (1440 - departure_times[TIME_SIZE - 1]) + converted_time;
 				compare_with_comming = converted_time - departure_times[i];
 
-				if(compare_with_past < 0)
-					compare_with_past = -compare_with_past;
-				if(compare_with_comming < 0)
-					compare_with_comming = -compare_with_comming;
-
-				if(compare_with_past < compare_with_comming) {
-					departure_time = departure_times[TIME_SIZE - 1];
-					arrival_time = arrival_times[TIME_SIZE - 1];
-				} else {
-					departure_time = departure_times[i];
-					arrival_time = arrival_times[i];
-				}
+				past_departure_time = departure_times[TIME_SIZE - 1];
+				past_arrival_time = arrival_times[TIME_SIZE - 1];
+				comming_departure_time = departure_times[i];
+				comming_arrival_time = arrival_times[i];
 			} else if(i == TIME_SIZE - 1) {
 				compare_with_past = converted_time - departure_times[TIME_SIZE - 1];
 				compare_with_comming = (1440 - converted_time) + departure_times[1];
 
-				if(compare_with_past < 0)
-					compare_with_past = -compare_with_past;
-				if(compare_with_comming < 0)
-					compare_with_comming = -compare_with_comming;
-
-				if(compare_with_past < compare_with_comming) {
-					departure_time = departure_times[TIME_SIZE - 1];
-					arrival_time = arrival_times[TIME_SIZE - 1];
-				} else {
-					departure_time = departure_times[i];
-					arrival_time = arrival_times[i];
-				}
-
+				past_departure_time = departure_times[TIME_SIZE - 1];
+				past_arrival_time = arrival_times[TIME_SIZE - 1];
+				comming_departure_time = departure_times[i];
+				comming_arrival_time = arrival_times[i];
 			} else {
 				compare_with_past = converted_time - departure_times[i - 1];
 				compare_with_comming = converted_time - departure_times[i];
 
-				if(compare_with_past < 0)
-					compare_with_past = -compare_with_past;
-				if(compare_with_comming < 0)
-					compare_with_comming = -compare_with_comming;
-
-				if(compare_with_past < compare_with_comming) {
-					departure_time = departure_times[i - 1];
-					arrival_time = arrival_times[i - 1];
-				} else {
-					departure_time = departure_times[i];
-					arrival_time = arrival_times[i];
-				}
+				past_departure_time = departure_times[i - 1];
+				past_arrival_time = arrival_times[i - 1];
+				comming_departure_time = departure_times[i];
+				comming_arrival_time = arrival_times[i];
 			}
+
+			if(compare_with_past < 0)
+				compare_with_past = -compare_with_past;
+			if(compare_with_comming < 0)
+				compare_with_comming = -compare_with_comming;
+
+			if(compare_with_past < compare_with_comming) {
+				departure_time = past_departure_time;
+				arrival_time = past_arrival_time;
+			} else {
+				departure_time = comming_departure_time;
+				arrival_time = comming_arrival_time;
+			}
+
+
 			break;
 		}
 	}
