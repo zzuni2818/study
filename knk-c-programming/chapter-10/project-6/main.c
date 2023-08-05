@@ -30,8 +30,8 @@ int main()
 			if(isdigit(ch)) {
 				push(ch - '0');
 			} else if(ch == '+' || ch == '-' || ch == '*' || ch == '/') {
-				operand1 = pop();
 				operand2 = pop();
+				operand1 = pop();
 
 				switch(ch) {
 				case '+':
