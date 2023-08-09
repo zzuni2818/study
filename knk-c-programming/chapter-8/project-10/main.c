@@ -48,14 +48,6 @@ int main()
 				past_arrival_time = arrival_times[TIME_SIZE - 1];
 				comming_departure_time = departure_times[i];
 				comming_arrival_time = arrival_times[i];
-			} else if(i == TIME_SIZE - 1) {
-				compare_with_past = converted_time - departure_times[TIME_SIZE - 1];
-				compare_with_comming = (1440 - converted_time) + departure_times[1];
-
-				past_departure_time = departure_times[TIME_SIZE - 1];
-				past_arrival_time = arrival_times[TIME_SIZE - 1];
-				comming_departure_time = departure_times[i];
-				comming_arrival_time = arrival_times[i];
 			} else {
 				compare_with_past = converted_time - departure_times[i - 1];
 				compare_with_comming = converted_time - departure_times[i];
@@ -79,8 +71,30 @@ int main()
 				arrival_time = comming_arrival_time;
 			}
 
-
 			break;
+		} else {
+			if(i == TIME_SIZE - 1) {
+				compare_with_past = converted_time - departure_times[TIME_SIZE - 1];
+				compare_with_comming = (1440 - departure_times[TIME_SIZE - 1]) + converted_time;
+
+				past_departure_time = departure_times[TIME_SIZE - 1];
+				past_arrival_time = arrival_times[TIME_SIZE - 1];
+				comming_departure_time = departure_times[0];
+				comming_arrival_time = arrival_times[0];
+
+				if(compare_with_past < 0)
+					compare_with_past = -compare_with_past;
+				if(compare_with_comming < 0)
+					compare_with_comming = -compare_with_comming;
+
+				if(compare_with_past < compare_with_comming) {
+					departure_time = past_departure_time;
+					arrival_time = past_arrival_time;
+				} else {
+					departure_time = comming_departure_time;
+					arrival_time = comming_arrival_time;
+				}
+			}
 		}
 	}
 
