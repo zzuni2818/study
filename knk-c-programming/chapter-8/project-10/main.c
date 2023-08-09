@@ -75,7 +75,7 @@ int main()
 		} else {
 			if(i == TIME_SIZE - 1) {
 				compare_with_past = converted_time - departure_times[TIME_SIZE - 1];
-				compare_with_comming = (1440 - departure_times[TIME_SIZE - 1]) + converted_time;
+				compare_with_comming = (1440 - converted_time) + departure_times[TIME_SIZE - 1];
 
 				past_departure_time = departure_times[TIME_SIZE - 1];
 				past_arrival_time = arrival_times[TIME_SIZE - 1];
